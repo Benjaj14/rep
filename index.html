@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gameflow - Bienvenido</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-image: url('https://www.rockstargames.com/VI/_next/static/media/GTAVI_Trailer2_poster.8aced7fd.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .overlay {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      padding: 40px 60px;
+      text-align: center;
+      color: white;
+      max-width: 600px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .overlay h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    .overlay p {
+      font-size: 1.3em;
+      margin-bottom: 40px;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .btn {
+      background: white;
+      color: black;
+      padding: 15px 30px;
+      font-size: 1.1em;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 4px 4px 0 black;
+      transition: transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      height: 50px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <img src="img/logo.png" alt="Gameflow Logo" class="logo">
+  <div class="overlay">
+    <h1>¡Bienvenido!</h1>
+    <p>Comienza con una de las dos opciones para ir a la página principal</p>
+    <div class="btn-container">
+      <a href="registro.html" class="btn">SIGN UP</a>
+      <a href="login.html" class="btn">LOG IN</a>
+    </div>
+  </div>
+
+</body>
+</html>

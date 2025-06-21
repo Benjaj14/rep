@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Administrador de Juegos</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: white;
+    }
+
+    /* Header */
+    header {
+      background-color: #000;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-group img {
+      width: 100%;
+      max-width: 100px;
+      height: 100%;
+      max-height: 100px;
+      margin-right: 15px;
+      vertical-align: middle;
+    }
+
+    /* Buscador */
+    .search-bar {
+      position: relative;
+    }
+
+    .search-bar input {
+      padding: 8px 35px 8px 10px;
+      border-radius: 5px;
+      border: none;
+      width: 200px;
+      font-size: 14px;
+    }
+
+    .search-bar .icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: #333;
+    }
+
+    /* Grid de juegos */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 50px;
+      padding: 20px;
+    }
+
+    .game {
+      height: auto;
+      width: auto;
+      background-color: #222;
+      padding: 5px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .game img {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .game img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Responsivo (menos de 768px) */
+    @media screen and (max-width: 768px) {
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .search-bar input {
+        width: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo-group">
+<a href="ps5.html" target="_blank">
+  <img src="img/ps.png" alt="PlayStation">
+</a>
+
+<a href="pc.html" target="_blank">
+  <img src="img/pc.png" alt="PlayStation">
+</a>
+<a href="nintendo.html" target="_blank">
+  <img src="img/nintendo.png" alt="PlayStation">
+</a>
+<a href="xbox.html" target="_blank">
+  <img src="img/xbox.png" alt="PlayStation">
+</a>
+  <div class="search-bar">
+    <input type="text" placeholder="Buscar...">
+    <span class="icon">🔍</span>
+  </div>
+</header>
+
+<main class="gallery">
+  <a class="game" href="tlou.html" target="_blank">
+    <img src="img/tlou.png" alt="The Last of Us II">
+  </a>
+  <a class="game" href="mk1.html" target="_blank">
+    <img src="img/mk1.png" alt="Mortal Kombat 1">
+  </a>
+  <a class="game" href="doom.html" target="_blank">
+    <img src="img/doom.png" alt="DOOM"> 
+  </a>
+  <a class="game" href="far.html" target="_blank">
+    <img src="img/far.png" alt="Far Cry 3">
+  </a>
+  <a class="game" href="spiderman.html" target="_blank">
+    <img src="img/spider.png" alt="Spider-Man 2">
+  </a>
+  <a class="game" href="need.html" target="_blank">
+    <img src="img/need.jpg" alt="need for speed">
+  </a>
+    <a class="game" href="cod" target="_blank">
+    <img src="img/cod.jpg" alt="cod call of duty ghost">
+  </a>
+    <a class="game" href="fifa.html" target="_blank">
+    <img src="img/fifa.png" alt="fifa ea 25">
+  </a>
+    <a class="game" href="db.html" target="_blank">
+    <img src="img/db.png" alt="dragon ball">
+  </a>
+    </a>
+    <a class="game" href="re4.html" target="_blank">
+    <img src="img/re4.png" alt="resient evil 4 remake">
+  </a>
+    </a>
+    <a class="game" href="gow.html" target="_blank">
+    <img src="img/gow.jpg" alt="god of war">
+  </a>
+    </a>
+    <a class="game" href="lego.html" target="_blank">
+    <img src="img/lego.png" alt="lego batman">
+  </a>
+    <a class="game" href="mariog.html" target="_blank">
+    <img src="img/mario.png" alt="mario">
+  </a>
+    <a class="game" href="sonic.html" target="_blank">
+    <img src="img/sonic.png" alt="sonic">
+  </a>
+    <a class="game" href="mario.html" target="_blank">
+    <img src="img/mariowii.jpg" alt="mario">
+  </a>
+      <a class="game" href="crash.html" target="_blank">
+    <img src="img/crash.jpg" alt="crash">
+  </a>
+</main>
+<script>
+  const searchInput = document.querySelector('.search-bar input');
+  const gameCards = document.querySelectorAll('.game');
+
+  searchInput.addEventListener('input', function () {
+    const searchTerm = searchInput.value.toLowerCase();
+
+    gameCards.forEach(card => {
+      const altText = card.querySelector('img').alt.toLowerCase();
+      if (altText.includes(searchTerm)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
+
