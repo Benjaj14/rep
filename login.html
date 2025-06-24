@@ -30,7 +30,6 @@
       width: 200px;
       height: auto;
       margin: 20px 0 10px 40px;
-      /* lo subí un poco y añadí algo de margen lateral */
     }
 
     .form-wrapper {
@@ -39,30 +38,36 @@
       justify-content: center;
       align-items: center;
     }
+
     .form-container {
       width: 80%;
       max-width: 380px;
     }
+
     h2 {
       font-size: 28px;
       margin-bottom: 30px;
     }
+
     .form-group {
       margin-bottom: 20px;
     }
-input[type="email"],
-input[type="password"],
-input[type="text"] {
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #000;
-  border-radius: 30px;
-  font-size: 16px;
-  outline: none;
-}
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid #000;
+      border-radius: 30px;
+      font-size: 16px;
+      outline: none;
+    }
+
     .password-container {
       position: relative;
     }
+
     .toggle-password {
       position: absolute;
       top: 50%;
@@ -90,13 +95,24 @@ input[type="text"] {
       color: #1A0DAB;
       text-decoration: none;
     }
+
     .register-link:hover {
       text-decoration: underline;
     }
 
     .right-panel {
-      width: 50%;
+      width: 77%;
       background-image: url('https://4kwallpapers.com/images/walls/thumbs_3t/16038.jpg');
+      background-size: cover;
+      background-position: right;
+      background-repeat: no-repeat;
+    }
+
+    .error {
+      color: red;
+      margin-bottom: 15px;
+      text-align: center;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -110,16 +126,17 @@ input[type="text"] {
     <div class="form-wrapper">
       <div class="form-container">
         <h2>¡Bienvenido de nuevo!</h2>
-        <form action="HOME.html" method="get">
+        <form id="loginForm">
+          <div id="loginError" class="error"></div>
           <div class="form-group">
-            <input type="email" placeholder="Correo electrónico" required>
+            <input type="email" id="loginEmail" placeholder="Correo electrónico" required>
           </div>
           <div class="form-group password-container">
-            <input id="password" type="password" placeholder="Contraseña" required>
+            <input id="loginPassword" type="password" placeholder="Contraseña" required>
             <span class="toggle-password" onclick="togglePassword()">👁️</span>
           </div>
           <button type="submit">Iniciar sesión</button>
-          <a href="signup.html" class="register-link">¿No tienes cuenta? Regístrate</a>
+          <a href="registro.html" class="register-link">¿No tienes cuenta? Regístrate</a>
         </form>
       </div>
     </div>
@@ -129,9 +146,40 @@ input[type="text"] {
 
   <script>
     function togglePassword() {
-      const inp = document.getElementById('password');
+      const inp = document.getElementById('loginPassword');
       inp.type = inp.type === 'password' ? 'text' : 'password';
     }
+
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const errorDiv = document.getElementById('loginError');
+      errorDiv.textContent = '';
+
+      try {
+        const res = await fetch('http://localhost:3000/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          alert('✅ Inicio de sesión exitoso.');
+          // Puedes guardar al usuario si lo deseas:
+          // localStorage.setItem('usuario', JSON.stringify(data.usuario));
+          window.location.href = 'HOME.html';
+        } else {
+          errorDiv.textContent = data.error || 'Error al iniciar sesión.';
+        }
+      } catch (err) {
+        console.error(err);
+        errorDiv.textContent = 'Error al conectar con el servidor.';
+      }
+    });
   </script>
 </body>
 </html>

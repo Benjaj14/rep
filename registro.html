@@ -121,22 +121,42 @@
   </div>
 
   <script>
-    document.getElementById('registerForm').addEventListener('submit', function (e) {
-      e.preventDefault(); 
+    document.getElementById('registerForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
 
-      const name = document.getElementById('name').value.trim();
+      const nombre = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
       const confirmPassword = document.getElementById('confirmPassword').value;
 
-      if (name && email && password && confirmPassword) {
-        if (password === confirmPassword) {
-          window.location.href = 'login.html'; 
-        } else {
-          alert('Las contraseñas no coinciden.');
-        }
-      } else {
+      if (!nombre || !email || !password || !confirmPassword) {
         alert('Por favor, completa todos los campos.');
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        alert('Las contraseñas no coinciden.');
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:3000/api/registro', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre, email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert('🎉 Registro exitoso. Ahora inicia sesión.');
+          window.location.href = 'login.html';
+        } else {
+          alert(data.error || 'Ocurrió un error al registrar.');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Error al conectar con el servidor.');
       }
     });
   </script>
